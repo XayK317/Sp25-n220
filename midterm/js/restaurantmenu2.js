@@ -13,7 +13,7 @@ let cart = [];
 
 const menuList = document.getElementById("menu");
 const cartList = document.getElementById("cart");
-const removeItemBtn = document.getElementById("remove-item"); // Button to remove last item
+const removeItemBtn = document.getElementById("remove-item");
 const noItemsMessage = document.getElementById("no-items");
 
 function checkCart() {

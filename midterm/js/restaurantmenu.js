@@ -84,4 +84,4 @@ cartTable.addEventListener("input", (e) => {
   }
 });
 
-updateCart();
+// updateCart();
