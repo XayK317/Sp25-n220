@@ -1,7 +1,3 @@
-const menuList = document.getElementById("menu");
-const cartTable = document.getElementById("cart");
-const noItemsRow = document.getElementById("no-items");
-
 const menuItems = [
   { name: "Hamburger", price: 2.99 },
   { name: "Cheeseburger", price: 3.99 },
@@ -12,6 +8,10 @@ const menuItems = [
   { name: "Fries", price: 1.99 },
   { name: "Onion Rings", price: 2.49 },
 ];
+
+const menuList = document.getElementById("menu");
+const cartTable = document.getElementById("cart");
+const noItemsRow = document.getElementById("no-items");
 
 const cart = [];
 function updateCart() {
@@ -49,15 +49,6 @@ function updateCart() {
   }
 }
 
-menuItems.forEach((item) => {
-  const li = document.createElement("li");
-  li.innerHTML = `${item.name} - $${item.price.toFixed(2)} 
-   <button class="add-to-cart" data-item="${item.name}" data-price="${
-    item.price
-  }">+</button>`;
-  menuList.appendChild(li);
-});
-
 menuList.addEventListener("click", (e) => {
   if (e.target && e.target.classList.contains("add-to-cart")) {
     const name = e.target.getAttribute("data-item");
@@ -65,6 +56,15 @@ menuList.addEventListener("click", (e) => {
     cart.push({ name, price, specialRequest: "" });
     updateCart();
   }
+});
+
+menuItems.forEach((item) => {
+  const li = document.createElement("li");
+  li.innerHTML = `${item.name} - $${item.price.toFixed(2)} 
+   <button class="add-to-cart" data-item="${item.name}" data-price="${
+    item.price
+  }">+</button>`;
+  menuList.appendChild(li);
 });
 
 cartTable.addEventListener("click", (e) => {
@@ -75,7 +75,6 @@ cartTable.addEventListener("click", (e) => {
     updateCart();
   }
 });
-
 cartTable.addEventListener("input", (e) => {
   if (e.target && e.target.classList.contains("special-request")) {
     const index = e.target.getAttribute("data-index");
@@ -84,4 +83,4 @@ cartTable.addEventListener("input", (e) => {
   }
 });
 
-// updateCart();
+updateCart();

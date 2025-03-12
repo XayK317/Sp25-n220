@@ -35,7 +35,7 @@ function updateCart() {
 }
 
 removeItemBtn.onclick = function () {
-  cart.pop(); // Remove the last item from the cart
+  cart.pop();
   updateCart();
 };
 
