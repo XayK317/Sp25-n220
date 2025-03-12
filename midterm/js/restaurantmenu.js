@@ -1,3 +1,7 @@
+const menuList = document.getElementById("menu");
+const cartTable = document.getElementById("cart");
+const noItemsMessage = document.getElementById("no-items");
+
 const menuItems = [
   { name: "Hamburger", price: 2.99 },
   { name: "Cheeseburger", price: 3.99 },
@@ -10,16 +14,8 @@ const menuItems = [
 ];
 
 let cart = [];
-const menuList = document.getElementById("menu");
-const cartTable = document.getElementById("cart");
-const noItemsMessage = document.getElementById("no-items");
-
 function checkCart() {
-  if (cart.length === 0) {
-    noItemsMessage.style.display = "block";
-  } else {
-    noItemsMessage.style.display = "none";
-  }
+  noItemsMessage.style.display = cart.length === 0 ? "block" : "none";
 }
 
 function updateCart() {
@@ -27,7 +23,6 @@ function updateCart() {
   let total = 0;
   cart.forEach(function (item, index) {
     const row = document.createElement("tr");
-
     row.innerHTML = `
       <td>${item.name}</td>
       <td>$${item.price.toFixed(2)}</td>
@@ -46,7 +41,6 @@ function updateCart() {
     <td colspan="3">$${total.toFixed(2)}</td>
   `;
   cartTable.appendChild(totalRow);
-
   checkCart();
 }
 
@@ -54,6 +48,8 @@ menuItems.forEach(function (item) {
   const li = document.createElement("li");
   const button = document.createElement("button");
   button.textContent = "+";
+  button.setAttribute("data-name", item.name);
+  button.setAttribute("data-price", item.price);
   button.onclick = function () {
     cart.push({ ...item, specialRequest: "" });
     updateCart();
@@ -70,13 +66,10 @@ cartTable.addEventListener("click", function (e) {
     updateCart();
   }
 });
-
 cartTable.addEventListener("input", function (e) {
   if (e.target && e.target.classList.contains("special-request")) {
     const index = e.target.getAttribute("data-index");
-    const newSpecialRequest = e.target.value;
-    cart[index].specialRequest = newSpecialRequest;
+    cart[index].specialRequest = e.target.value;
   }
 });
-
 updateCart();
